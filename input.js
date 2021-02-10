@@ -4,6 +4,7 @@ const { wasd, msgs } = require('./constants');
 
 // Stores the active TCP connection object.
 let connection;
+let movementID;
 
 const setupInput = function(conn) {
   connection = conn;
@@ -20,9 +21,13 @@ const handleUserInput = function(key) { // this is our callback for handling use
     process.exit(); // quit the process of running client.js
   }
 
+  if (Object.keys(wasd).includes(key)) clearInterval(movementID); // stops previous setInverval move .write if the key is a movement key
+  
   for (const move of Object.keys(wasd)) {
     if (key === move) {
-      connection.write(wasd[move]);    // The "connection" is an object that was passed into the setUpInput function call from play.js
+      movementID = setInterval(() => {
+        connection.write(wasd[move]);
+      }, 50);    // The "connection" is an object that was passed into the setUpInput function call from play.js
     }
   } 
 

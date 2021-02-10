@@ -11,7 +11,7 @@ const msgs = {
   "\u0078": "nom nom!", // x key says "yummy!"
   "\u0072": "You DED!", // r key says...
   "\u0065": "Incoming!", // e key
-}
+};
 
 module.exports = {
   IP,
