@@ -1,3 +1,4 @@
+const { wasd, msgs } = require('./constants');
 /* Setup User Interface */
 // So we can handle user input via stdin
 
@@ -19,19 +20,17 @@ const handleUserInput = function(key) { // this is our callback for handling use
     process.exit(); // quit the process of running client.js
   }
 
-  const wasd = {
-    "\u0077": "Move: up", 
-    "\u0061": "Move: left", 
-    "\u0073": "Move: down",
-    "\u0064": "Move: right"
-  };
-
   for (const move of Object.keys(wasd)) {
     if (key === move) {
       connection.write(wasd[move]);    // The "connection" is an object that was passed into the setUpInput function call from play.js
-      connection.write("Say: NOMNOM!");
     }
   } 
+
+  for (const say of Object.keys(msgs)) { // in the msgs obj x = nom nom, e = incoming!, x = you DED
+    if (key === say) {
+      connection.write("Say: " + msgs[say]);    // The "connection" is an object that was passed into the setUpInput function call from play.js
+    }
+  }
   
 }; // because this function is only used in reference and not called elsewhere we dont need to export it
 
