@@ -9,6 +9,11 @@ const connect = function() {
   // interpret incoming data as text
   conn.setEncoding('utf8');
 
+  conn.on("connect", (data) => { // The "connect" event is triggered on a connection as soon as it is successfully established.
+    console.log("Connection established XD");
+    conn.write("Name: AJM");
+  })
+  
   conn.on("data", (data) => {
     console.log("Server says: " + data);
   })
